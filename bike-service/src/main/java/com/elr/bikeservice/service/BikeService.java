@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class BikeService {
 
-    @Autowired
-    BikeRepository bikeRepository;
+    private final BikeRepository bikeRepository;
+
+    public BikeService(BikeRepository bikeRepository) {
+        this.bikeRepository = bikeRepository;
+    }
+
 
     public List<Bike> getAll() {
         return bikeRepository.findAll();

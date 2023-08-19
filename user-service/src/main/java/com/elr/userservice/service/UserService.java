@@ -7,6 +7,9 @@ import com.elr.userservice.models.Bike;
 import com.elr.userservice.models.Car;
 import com.elr.userservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,17 +20,21 @@ import java.util.Map;
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    @Autowired
-    CarFeignClient carFeignClient;
+    private final CarFeignClient carFeignClient;
 
-    @Autowired
-    BikeFeignClient bikeFeignClient;
+    private final BikeFeignClient bikeFeignClient;
+
+    public UserService(UserRepository userRepository, RestTemplate restTemplate,
+                       CarFeignClient carFeignClient, BikeFeignClient bikeFeignClient) {
+        this.userRepository = userRepository;
+        this.restTemplate = restTemplate;
+        this.carFeignClient = carFeignClient;
+        this.bikeFeignClient = bikeFeignClient;
+    }
 
     public List<User> getAll(){
         return userRepository.findAll();
@@ -41,9 +48,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public  List<Car> getCars(int UserId) {
-        List<Car> cars;
-        cars = restTemplate.getForObject("http://localhost:8002/car/byuser/"+UserId,List.class);
+    public  List<Car> getCars(int userId) {
+        //List<Car> cars = restTemplate.getForObject("http://localhost:8002/car/byuser/" + UserId, List.class);
+        ResponseEntity<List<Car>> responseEntity = restTemplate.exchange(
+                "http://localhost:8002/car/byuser/" + userId,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Car>>() {}
+        );
+
+        List<Car> cars = responseEntity.getBody();
         return cars;
     }
 

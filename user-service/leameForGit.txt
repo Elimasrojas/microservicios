@@ -2,7 +2,7 @@
 echo "# microservicios" >> README.md
 git init
 git add README.md
-git commit -m "first commit"
+git commit -m "0- Config de proyecto Inicio"
 git branch -M main
 git remote add origin https://github.com/Elimasrojas/microservicios.git
 git push -u origin main
@@ -11,4 +11,3 @@ git push -u origin main
 git remote add origin https://github.com/Elimasrojas/microservicios.git
 git branch -M main
 git push -u origin main
-....
