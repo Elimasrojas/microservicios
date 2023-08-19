@@ -48,6 +48,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /*
     public  List<Car> getCars(int userId) {
         //List<Car> cars = restTemplate.getForObject("http://localhost:8002/car/byuser/" + UserId, List.class);
         ResponseEntity<List<Car>> responseEntity = restTemplate.exchange(
@@ -60,6 +61,13 @@ public class UserService {
         List<Car> cars = responseEntity.getBody();
         return cars;
     }
+    */
+    public  List<Car> getCars(int userId) {
+
+        List<Car> cars = carFeignClient.getCars(userId);
+        return cars;
+    }
+
 
     public  List<Bike> getBikes(int UserId) {
         List<Bike> bikes;
