@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bike-service" />
+        <module name="config-server" />
         <module name="car-service" />
         <module name="user-service" />
       </profile>
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="bike-service" options="-parameters" />
       <module name="car-service" options="-parameters" />
+      <module name="config-server" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
