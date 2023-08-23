@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: 06_eureka_mult_inst
+          default-label: 07_gateway
           uri: https://github.com/Elimasrojas/microservicios
           search-paths: config-data
   application:
