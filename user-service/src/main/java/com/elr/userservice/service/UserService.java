@@ -71,7 +71,7 @@ public class UserService {
 
     public  List<Bike> getBikes(int UserId) {
         List<Bike> bikes;
-        bikes = restTemplate.getForObject("http://localhost:8003/bike/byuser/"+UserId,List.class);
+        bikes = restTemplate.getForObject("http://bike-service/bike/byuser/"+UserId,List.class);
         return bikes;
     }
 
