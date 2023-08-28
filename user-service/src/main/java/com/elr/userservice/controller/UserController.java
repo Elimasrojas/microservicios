@@ -93,7 +93,7 @@ public class UserController {
 
     //metodos fallback
 
-    public ResponseEntity<List<Car>> fallbackGetCars(@PathVariable("userId") int userId){
+    public ResponseEntity<List<Car>> fallbackGetCars(@PathVariable("userId") int userId, RuntimeException e){
         return  new ResponseEntity("El usuario"+ userId+"tiene los coches en el taller",
                 HttpStatus.OK);
     }
@@ -106,7 +106,7 @@ public class UserController {
 
     }
 
-    public ResponseEntity<List<Bike>> fallbackGetBikes(@PathVariable("userId") int userId){
+    public ResponseEntity<List<Bike>> fallbackGetBikes(@PathVariable("userId") int userId, RuntimeException e){
         return  new ResponseEntity("El usuario"+ userId+"tiene las Motos en el taller",
                 HttpStatus.OK);
     }
