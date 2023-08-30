@@ -59,6 +59,17 @@ spring:
     user: wpadmin
     password: password
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
-  application:
-    zipkin: http://localhost:9411
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+
+  tracing:
+    sampling:
+      probability: 1.0
