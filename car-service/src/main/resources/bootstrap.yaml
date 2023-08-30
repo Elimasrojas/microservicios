@@ -5,3 +5,18 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+
+  tracing:
+    sampling:
+      probability: 1.0
