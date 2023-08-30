@@ -58,3 +58,12 @@ spring:
   flyway:
     user: wpadmin
     password: password
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  tracing:
+    sampling:
+      probability: 1.0
