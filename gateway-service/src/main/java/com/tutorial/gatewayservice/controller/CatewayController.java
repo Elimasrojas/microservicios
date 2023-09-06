@@ -1,4 +1,4 @@
-package com.turorial.configserver.controller;
+package com.tutorial.gatewayservice.controller;
 
 import jdk.jfr.Registered;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
