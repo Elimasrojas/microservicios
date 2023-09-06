@@ -9,26 +9,31 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
 //existe apartir de la version 5
-@EnableWebSecurity
+@EnableWebFluxSecurity
 @EnableMethodSecurity(prePostEnabled = true)
-@RequiredArgsConstructor
 public class SecurityConfig  {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http)  {
 
-        http.cors(c->c.disable()).csrf(c->c.disable())
-                .authorizeHttpRequests((authorizeRequests) ->
-                                authorizeRequests.anyRequest().authenticated()
-                )
-                .oauth2Login(Customizer.withDefaults());
-        return http.build();
+        return http.authorizeExchange((exchanges) ->exchanges
+                        .anyExchange()
+                        .authenticated()
+                        ).oauth2Login(Customizer.withDefaults()).build();
+
+
+
+
+
 
 
     }
