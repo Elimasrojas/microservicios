@@ -13,6 +13,8 @@ eureka:
 spring:
   cloud:
     gateway:
+      default-filters:
+        - TokenRelay
       discovery:
         locator:
           enable: true
@@ -21,6 +23,8 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
+          filters:
+            - RemoveRequestHeader=Cookie
         - id: car-service
           uri: lb://car-service
           predicates:
@@ -30,5 +34,20 @@ spring:
           predicates:
             - Path=/bike/**
 
-
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            authorization-uri: http://localhost:9090/realms/spring-boot-real-dev/protocol/openid-connect/auth
+            userinfo-uri: http://localhost:9090/realms/spring-boot-real-dev/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
+            token-uri: http://localhost:9090/realms/spring-boot-real-dev/protocol/openid-connect/token
+        registration:
+          spring-client-api-rest:
+            provider: keycloak
+            client-id: spring-client-api-rest
+            client-secret: tOeFhVmrBMdRKpMmJOy6xXedPOiCIX1u
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/*"
 
